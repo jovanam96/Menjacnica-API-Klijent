@@ -2,7 +2,7 @@ package rs.ac.bg.fon.jgrass.menjacnica;
 
 public class Zemlja {
 	private String alpha3;
-	private String currencyID;
+	private String currencyId;
 	private String currencyName;
 	private String currencySymbol;
 	private String id;
@@ -13,11 +13,11 @@ public class Zemlja {
 	public void setAlpha3(String alpha3) {
 		this.alpha3 = alpha3;
 	}
-	public String getCurrencyID() {
-		return currencyID;
+	public String getCurrencyId() {
+		return currencyId;
 	}
-	public void setCurrencyID(String currencyID) {
-		this.currencyID = currencyID;
+	public void setCurrencyId(String currencyID) {
+		this.currencyId = currencyID;
 	}
 	public String getCurrencyName() {
 		return currencyName;
@@ -45,7 +45,7 @@ public class Zemlja {
 	}
 	@Override
 	public String toString() {
-		return "Zemlja [alpha3=" + alpha3 + ", currencyID=" + currencyID + ", currencyName=" + currencyName
+		return "Zemlja [alpha3=" + alpha3 + ", currencyID=" + currencyId + ", currencyName=" + currencyName
 				+ ", currencySymbol=" + currencySymbol + ", id=" + id + ", name=" + name + "]";
 	}
 }

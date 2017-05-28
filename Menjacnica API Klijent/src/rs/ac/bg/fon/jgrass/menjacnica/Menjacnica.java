@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Menjacnica extends JFrame {
 
@@ -66,9 +68,11 @@ public class Menjacnica extends JFrame {
 		if (comboBoxIZ == null) {
 			comboBoxIZ = new JComboBox<String>();
 			comboBoxIZ.setBounds(71, 99, 111, 20);
-			LinkedList<String> zemlje = GUIKontroler.preuzimiZemlje();
+			LinkedList<Zemlja> zemlje = GUIKontroler.preuzimiZemlje();
+			
 			for (int i = 0; i < zemlje.size(); i++) {
-				comboBoxIZ.addItem(zemlje.get(i));
+				String naziv = zemlje.get(i).getName();
+				comboBoxIZ.addItem(naziv);
 			}
 		}
 		return comboBoxIZ;
@@ -77,9 +81,10 @@ public class Menjacnica extends JFrame {
 		if (comboBoxU == null) {
 			comboBoxU = new JComboBox<String>();
 			comboBoxU.setBounds(207, 99, 111, 20);
-			LinkedList<String> zemlje = GUIKontroler.preuzimiZemlje();
+			LinkedList<Zemlja> zemlje = GUIKontroler.preuzimiZemlje();
 			for (int i = 0; i < zemlje.size(); i++) {
-				comboBoxU.addItem(zemlje.get(i));
+				String naziv = zemlje.get(i).getName();
+				comboBoxU.addItem(naziv);
 			}
 		}
 		return comboBoxU;
@@ -117,8 +122,33 @@ public class Menjacnica extends JFrame {
 	private JButton getBtnKonvertuj() {
 		if (btnKonvertuj == null) {
 			btnKonvertuj = new JButton("Konvertuj");
+			btnKonvertuj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					double kurs = GUIKontroler.konvertuj(preuzmiIzCmbBox());
+					if(kurs == 0) {
+						GUIKontroler.ispisiPoruku();
+					}
+				}
+			});
 			btnKonvertuj.setBounds(142, 210, 111, 23);
 		}
 		return btnKonvertuj;
+	}
+	
+	private String preuzmiIzCmbBox() {
+		LinkedList<Zemlja> zemlje = GUIKontroler.preuzimiZemlje();
+		String iz = "";
+		String u = "";
+		for (int i = 0; i < zemlje.size(); i++) {
+			if((comboBoxIZ.getSelectedItem()).equals(zemlje.get(i).getName())) {
+				iz = zemlje.get(i).getAlpha3();
+
+			}
+			if((comboBoxU.getSelectedItem()).equals(zemlje.get(i).getName())) {
+				u = zemlje.get(i).getAlpha3();
+
+			}
+		}
+		return iz + "_" + u;
 	}
 }
