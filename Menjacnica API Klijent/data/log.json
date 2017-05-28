@@ -1,0 +1,26 @@
+[
+  {
+    "datumVreme": "2017-05-27 23:18:42.000442",
+    "izValuta": "AUD",
+    "uValuta": "AFN",
+    "kurs": 50.8429
+  },
+  {
+    "datumVreme": "2017-05-27 23:19:09.000612",
+    "izValuta": "KHR",
+    "uValuta": "AFN",
+    "kurs": 0.01695102
+  },
+  {
+    "datumVreme": "2017-05-27 23:20:45.000551",
+    "izValuta": "XAF",
+    "uValuta": "AUD",
+    "kurs": 0.00228685
+  },
+  {
+    "datumVreme": "2017-05-27 23:20:53.000964",
+    "izValuta": "XAF",
+    "uValuta": "AUD",
+    "kurs": 0.00228685
+  }
+]

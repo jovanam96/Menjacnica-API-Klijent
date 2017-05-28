@@ -2,16 +2,24 @@ package rs.ac.bg.fon.jgrass.menjacnica;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 
 public class Menjacnica extends JFrame {
@@ -124,10 +132,10 @@ public class Menjacnica extends JFrame {
 			btnKonvertuj = new JButton("Konvertuj");
 			btnKonvertuj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					double kurs = GUIKontroler.konvertuj(preuzmiIzCmbBox());
-					if(kurs == 0) {
-						GUIKontroler.ispisiPoruku();
-					}
+					String q = preuzmiIz() + "_" + preuzmiU();
+					double kurs = GUIKontroler.konvertuj(q);
+					textField_1.setText((Integer.parseInt(textField.getText()) * kurs) + "");
+					GUIKontroler.sacuvajUFajl(preuzmiIz(), preuzmiU(), kurs);
 				}
 			});
 			btnKonvertuj.setBounds(142, 210, 111, 23);
@@ -135,20 +143,29 @@ public class Menjacnica extends JFrame {
 		return btnKonvertuj;
 	}
 	
-	private String preuzmiIzCmbBox() {
+	private String preuzmiIz() {
 		LinkedList<Zemlja> zemlje = GUIKontroler.preuzimiZemlje();
 		String iz = "";
-		String u = "";
 		for (int i = 0; i < zemlje.size(); i++) {
 			if((comboBoxIZ.getSelectedItem()).equals(zemlje.get(i).getName())) {
-				iz = zemlje.get(i).getAlpha3();
-
-			}
-			if((comboBoxU.getSelectedItem()).equals(zemlje.get(i).getName())) {
-				u = zemlje.get(i).getAlpha3();
+				iz = zemlje.get(i).getCurrencyId();
 
 			}
 		}
-		return iz + "_" + u;
+		return iz;
 	}
+	
+	public String preuzmiU() {
+		LinkedList<Zemlja> zemlje = GUIKontroler.preuzimiZemlje();
+		String u = "";
+		for (int i = 0; i < zemlje.size(); i++) {
+			if((comboBoxU.getSelectedItem()).equals(zemlje.get(i).getName())) {
+				u = zemlje.get(i).getCurrencyId();
+
+			}
+		}
+		return  u;
+	}
+	
+	
 }
